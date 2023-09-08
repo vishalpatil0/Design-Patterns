@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Employee {
+class Employee {
    private String name;
    private String dept;
    private int salary;
