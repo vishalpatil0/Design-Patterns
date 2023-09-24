@@ -2,7 +2,7 @@
 // check the interpreter.
 interface Expression
 {
-	boolean interpreter(String con);
+	boolean interpret(String context);
 }
 
 // TerminalExpression class implementing
@@ -18,16 +18,9 @@ class TerminalExpression implements Expression
 		this.data = data;
 	}
 
-	public boolean interpreter(String con)
+	public boolean interpret(String context)
 	{
-		if(con.contains(data))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return data.contains(context);
 	}
 }
 // OrExpression class implementing
@@ -44,9 +37,9 @@ class OrExpression implements Expression
 		this.expr1 = expr1;
 		this.expr2 = expr2;
 	}
-	public boolean interpreter(String con)
+	public boolean interpret(String context)
 	{		
-		return expr1.interpreter(con) || expr2.interpreter(con);
+		return expr1.interpret(context) || expr2.interpret(context);
 	}
 }
 
@@ -64,9 +57,9 @@ class AndExpression implements Expression
 		this.expr1 = expr1;
 		this.expr2 = expr2;
 	}
-	public boolean interpreter(String con)
+	public boolean interpret(String con)
 	{		
-		return expr1.interpreter(con) && expr2.interpreter(con);
+		return expr1.interpret(con) && expr2.interpret(con);
 	}
 }
 
@@ -76,20 +69,20 @@ class InterpreterPattern
 
 	public static void main(String[] args)
 	{
-		Expression person1 = new TerminalExpression(Kushagra);
-		Expression person2 = new TerminalExpression(Lokesh);
+		Expression person1 = new TerminalExpression("Kushagra");
+		Expression person2 = new TerminalExpression("Lokesh");
 		Expression isSingle = new OrExpression(person1, person2);
 		
-		Expression vikram = new TerminalExpression(Vikram);
-		Expression committed = new TerminalExpression(Committed);
-		Expression isCommitted = new AndExpression(vikram, committed);	
+		Expression vikram = new TerminalExpression("Vikram");
+		Expression committed = new TerminalExpression("Committed");
+		Expression isCommitted = new AndExpression(vikram, isSingle);	
 
-		System.out.println(isSingle.interpreter(Kushagra));
-		System.out.println(isSingle.interpreter(Lokesh));
-		System.out.println(isSingle.interpreter(Achint));
+		System.out.println(isSingle.interpret("Kushagra"));
+		System.out.println(isSingle.interpret("Lokesh"));
+		System.out.println(isSingle.interpret("Achint"));
 		
-		System.out.println(isCommitted.interpreter(Committed, Vikram));
-		System.out.println(isCommitted.interpreter(Single, Vikram));
+		System.out.println(isCommitted.interpret("Vikram"));
+		System.out.println(isCommitted.interpret("Vikram"));
 
 	}
 }

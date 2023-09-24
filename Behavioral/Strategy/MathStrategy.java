@@ -1,4 +1,4 @@
-f
+
 
 interface strategy {
     void doOperation(int a, int b);

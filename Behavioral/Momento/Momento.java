@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.loading.MLet;
-
 class TextArea {
     private String text = "";
 
@@ -18,7 +16,7 @@ class TextArea {
     {
         return text;
     }    
- static class Momento {
+    static class Momento {
         String data;
 
         Momento(String data) {
